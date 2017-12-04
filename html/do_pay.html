@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta name="format-detection" content="telephone=no,email=no,adress=no">
+	<meta name="full-screen" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<link rel="stylesheet" type="text/css" href="../css/new.css">
+	<style type="text/css">
+	  .delete{
+	  	background:#fff url(../images/qingchu.png) no-repeat center; 	
+        background-size:0.61rem 0.6rem;
+	    border-bottom: 1px solid #dadada;
+	  }
+	  .delete:active{
+	  background:rgba(0,0,0,0.1) url(../images/qingchu.png) no-repeat center;
+	  background-size:0.61rem 0.6rem;
+	  border-bottom: 1px solid #dadada;
+      }
+     .down{
+		background:#fff url(../images/jianpan.png) no-repeat center;
+	    background-size:0.6rem 0.47rem;
+      }
+      .icon dt{
+		  width:1rem;
+		  height:1rem;
+		  background: red;
+		  border:1px solid #f3f2f2;
+		  border-radius: 0.5rem;
+		  background:url(../images/icon.png) no-repeat;
+		  background-size: contain;
+		  float: left;
+		  margin-right: 0.3rem;
+       }
+       .dv{
+       	     /* 微信 */
+		  border-left: 2px solid #5dc458;
+		     /* 支付宝 */
+		  /*  border-left: 2px solid #6dc0e2; */
+       }
+       .mask{
+       	width: 100%;
+       	height: 100%;
+       	position:absolute;
+       	background: #02bf02;
+       	z-index: 100;
+       	top: 0;
+       	left: 0;
+       	display: none;
+       }
+       .mask img{
+       	vertical-align:middle;
+       	-webkit-animation:rotate 1s infinite linear;
+       }
+       @-webkit-keyframes blink {
+		  0%,100% {
+		       /* 微信 */
+		    border-left: 2px solid #5dc458;
+		      /* 支付宝 */
+		      /* border-left: 2px solid #6dc0e2; */
+		  }
+
+		  50% {
+		    border-left: 2px solid #fff;
+		  }
+		}
+       @-webkit-keyframes rotate {
+		  from {-webkit-transform:rotate(0deg);}
+		  to {-webkit-transform:rotate(360deg);}
+        }
+        
+	</style>
+	<title>联动一码付</title>
+</head>
+<body>
+	<div class="contain">
+	    <div class="Mer">
+	    	<dl class="icon">
+	    		<dt></dt>
+	    		<dd>
+	    		   <p>联动优势</p>
+	    		   <p style="color: #a5a5a5" class="right_o">商户描述</p>
+	    		</dd>
+	    	</dl>
+	    	<div class="phone">18201672222</div>
+	    </div>
+		<div class="header">
+			<p class="money"><span class="change">消费金额</span><label id="nubmer" >￥<span id="price"></span><span class="dv"></span></label></p>
+		</div>
+		<div id="box">
+			<div class="left">
+				<ul class="key">
+					<li>
+						<p>1</p>
+						<p>2</p>
+						<p>3</p>
+			        </li>
+			        <li>
+						<p>4</p>
+						<p>5</p>
+						<p>6</p>
+			        </li>
+			        <li>
+						<p>7</p>
+						<p>8</p>
+						<p>9</p>
+			        </li>
+			        <li>
+						<p class="down"></p>
+						<p>0</p>
+						<p>.</p>
+			        </li>
+				</ul>
+			</div>
+			<div class="right">
+				<ol class="drw">
+				  <li class="delete" id="del"></li>
+				  <li class="pay">支付
+				     <div class="small" id="pay"></div>
+				     <div class="mask"><img src="../images/mask.png"></div>
+				  </li>
+				</ol>
+			</div>
+		</div>
+		<div class="drew"></div>
+	</div>
+	<script>
+     document.documentElement.style.fontSize=document.documentElement.clientWidth/7.5+'px';
+    </script>
+    <script type="text/javascript" src="../js/zepto.min.js"></script>
+    <script type="text/javascript">
+		window.onload = function() {
+			//隐藏键盘
+			$(".down").on("touchstart", function() {
+				money = $("#price").text();
+				//console.log(money)
+				$("#box").animate({
+					bottom: "-5rem"
+				}, 'fast');
+				if (money == "") {
+					$(".change").html("咨询服务员后输入消费金额");
+				}
+			})
+
+			//显示键盘
+			$(".money").on("touchstart", function() {
+				$("#box").animate({
+					bottom: "0"
+				}, 'fast');
+				$(".change").html("消费金额");
+			})
+
+			$(".left").on("touchstart", "p", function() {
+				var text = $(this).text();
+				var price = $("#price").text(),
+					sum = price + text;
+				var numText = sum * 1;
+				if (price.indexOf(".") < 0 && text == ".") {
+					$("#price").text(sum.replace(/^\./g, "0."));
+				} else if (price.indexOf(".") > 0 && text == ".") {
+					//console.log(price)
+					$("#price").text(price);
+				} else {
+					if (numText <= 10000.99) {
+						if (numText > 0 && price != "0.00") {
+							$("#price").text(sum.replace(/^\./g, "0.").replace(/^[0]+([1-9])/, function(a, b) {
+								return b;
+							}).replace(".", "$#$").replace(/\./g, "").replace("$#$", ".").replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'));
+							if (sum.length <= 9 && numText > 0) {
+								$(".small").css("opacity", 0);
+							} else {
+								//console.log(sum.length)
+								//console.log(sum)
+								$(".small").css("opacity", 0.5);
+							}
+						} else if (numText > 0 && price == "0.00") {
+							$(".small").css("opacity", 0.5);
+						} else {
+							$("#price").text(sum.replace(/^\./g, "0.").replace(/^[0]+/, "0").replace(".", "$#$").replace(/\./g, "").replace("$#$", ".").replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'));
+							if (sum.length <= 9 && numText > 0) {
+								$(".small").css("opacity", 0);
+							} else {
+								//console.log(sum.length)
+								$(".small").css("opacity", 0.5);
+							}
+						}
+					} else {
+						getWidth("超过可支付最大金额");
+					}
+				}
+
+				return false;
+			})
+			
+			//删除
+			$(".right").on("touchstart", ".delete", function() {
+				var num = $("#price").text();
+				$("#price").text(num.substr(0, num.length - 1));
+				var nextNum = $("#price").text(),
+					numText = nextNum * 1;
+				//console.log(nextNum.length)
+				if (nextNum.length <= 8 && numText > 0) {
+					$(".small").css("opacity", 0);
+				} else {
+					$(".small").css("opacity", 0.5);
+				}
+
+				return false;
+			})
+
+			//支付
+			$("#pay").on("touchstart", function() {
+				var op = $(this).css("opacity");
+				if (op == 0) {
+					var prices = $("#price").text();
+					$(".mask").show(); //显示加载动画
+					//请求接口
+					$.ajax({
+						url: "http://<%= g_phpapi_ip %>:<%= g_phpapi_port %>/GetWeChat",
+						type: 'GET',
+						dataType: "jsonp",
+						jsonp: "callback",
+						data: {
+							"typeX": "U_SEL_POS_YMF_PAY_ORDER",
+							"Amount": prices,
+							"MerNo": "9996",
+							"btype": "json",
+							"WeiZfb": "wx_zfb_flag",
+							"ctype": "gb2312"
+						},
+						success: function(data) {
+							setTimeout(function() {
+								$(".mask").hide();
+								$(".small").css("opacity", 0.5);
+							}, 4000)
+						},
+						error: function() {
+							setTimeout(function() {
+								$(".mask").hide();
+
+								console.log("请求失败")
+								$(".small").css("opacity", 0.5);
+
+							}, 4000)
+						}
+					})
+				}
+			})
+
+			//提示错误信息
+			function getWidth(ma) {
+				$(".drew").show();
+				$(".drew").html(ma);
+				var wid = $(".drew").width() / 2;
+				//console.log(wid)
+				$(".drew").css({
+					"marginLeft": -wid + "px"
+				});
+				setTimeout("$('.drew').hide()", 3000);
+			}
+		}
+
+    </script>
+</body>
+</html>

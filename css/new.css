@@ -1,0 +1,296 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  /*系统默认菜单被禁用*/
+  -webkit-user-select: none;
+  /*webkit浏览器*/
+  -khtml-user-select: none;
+  /*早期浏览器*/
+  -moz-user-select: none;
+  /*火狐*/
+  -ms-user-select: none;
+  /*IE10*/
+  user-select: none;
+}
+
+body, div, p, ul, ol, li, dl, dt, dd, form, input, table, img, h1, h2, h3, h4, h5, h6, header, section, footer, nav, figure, figcaption, article {
+  margin: 0;
+  padding: 0;
+}
+
+header, section, footer, nav, figure, figcaption, article, menu {
+  display: block;
+}
+
+body {
+  font-size: 12px;
+  font-family: "微软雅黑";
+}
+
+ul, li, ol {
+  list-style: none;
+}
+
+a, a:hover {
+  text-decoration: none;
+  color: #393737;
+}
+
+img {
+  border: none;
+  display: inline-block;
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+em, i {
+  font-style: normal;
+}
+
+.l, .left {
+  float: left;
+  display: inline-block;
+}
+
+.r, .right {
+  float: right;
+  display: inline-block;
+}
+
+.clearfix:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  clear: both;
+}
+
+header, nav, section, footer {
+  min-width: 320px;
+}
+
+.w280 {
+  min-width: 280px;
+  margin: 0 2%;
+}
+
+.w300 {
+  min-width: 300px;
+  margin: 0 3%;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  background: #f3f1f2;
+  min-width: 320px;
+  background: #efeff4;
+}
+
+.header {
+  width: 100%;
+  background: #fff;
+  padding: 0.3rem;
+}
+
+.Mer {
+  width: 100%;
+  height: 1.54rem;
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+  padding: 0.3rem;
+}
+
+.money {
+  width: 100%;
+  height: 1.13rem;
+  border: 1px solid #5dc458;
+  border-radius: 0.2rem;
+  line-height: 1.13rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  position: relative;
+  font-size: 0.4rem;
+}
+
+.money span {
+  color: #bcbcbc;
+}
+
+.money label {
+  color: #bcbcbc;
+  font-weight: 500;
+  float: right;
+  font-size: 0.6rem;
+}
+#price {
+  color: #f2464e;
+}
+.dv {
+  height: 0.6rem;
+  width: 2px;
+  position: absolute;
+  right: 0.2rem;
+  top: 50%;
+  margin-top: -0.3rem;
+  animation: blink 1.2s infinite steps(1,start);
+  -webkit-animation: blink 1.2s infinite steps(1,start);
+}
+/* 键盘 */
+#box {
+  width: 100%;
+  height: 4.44rem;
+  background: #fff;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.left {
+  width: 75%;
+  height: 100%;
+  background: red;
+  float: left;
+}
+
+.right {
+  width: 25%;
+  height: 100%;
+}
+
+.key {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  -moz-flex-direction: column;
+  color: #010101;
+  background: #fff;
+}
+
+.key li {
+  width: 100%;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  border-bottom: 1px solid #dadada;
+}
+
+.key li:last-child {
+  border-bottom: none;
+}
+
+.key li p {
+  -webkit-flex: 1;
+  -webkit-box-flex: 1;
+  text-align: center;
+  line-height: 1.1rem;
+  border-right: 1px solid #dadada;
+  color: #000;
+  font-size: 22px;
+}
+.key li p:active {
+  background: rgba(0,0,0,0.1);
+}
+
+.drw {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  -moz-flex-direction: column;
+}
+
+.delete {
+  width: 100%;
+  height: 25%;
+}
+
+.pay {
+  -webkit-flex: 1;
+  -webkit-box-flex: 1;
+  text-align: center;
+  line-height: 3.33rem;
+  color: #fff;
+  background: #02bf02;
+  font-size: 0.5rem;
+  position: relative;
+}
+
+.small {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #fff;
+  opacity: 0.5;
+}
+/*弹出框*/
+.drew {
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  text-align: center;
+  border-radius: 0.2rem;
+  padding: 0rem 0.15rem;
+  height: 1rem;
+  line-height: 1rem;
+  position: absolute;
+  top: 3.3rem;
+  left: 50%;
+  margin: 0 auto; 
+  display: none;
+}
+
+.icon {
+  float: left;
+}
+
+.icon dd {
+  float: left;
+}
+
+.icon dd p {
+  line-height: 0.5rem;
+}
+
+.icon dd p:first-child {
+  font-size: 0.4rem;
+}
+
+.phone {
+  float: right;
+}
+
+
