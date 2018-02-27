@@ -37,9 +37,9 @@
        }
        .dv{
        	     /* 微信 */
-		  border-left: 2px solid #5dc458;
+		  /* border-left: 2px solid #5dc458; */
 		     /* 支付宝 */
-		  /*  border-left: 2px solid #6dc0e2; */
+		  border-left: 2px solid #6dc0e2;
        }
        .mask{
        	width: 100%;
@@ -58,9 +58,9 @@
        @-webkit-keyframes blink {
 		  0%,100% {
 		       /* 微信 */
-		    border-left: 2px solid #5dc458;
+		    /* border-left: 2px solid #5dc458; */
 		      /* 支付宝 */
-		      /* border-left: 2px solid #6dc0e2; */
+		    border-left: 2px solid #6dc0e2;
 		  }
 
 		  50% {
@@ -217,6 +217,7 @@
 				if (op == 0) {
 					var prices = $("#price").text();
 					$(".mask").show(); //显示加载动画
+					console.log(prices);
 					//请求接口
 					$.ajax({
 						url: "http://<%= g_phpapi_ip %>:<%= g_phpapi_port %>/GetWeChat",
